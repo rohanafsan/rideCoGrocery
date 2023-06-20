@@ -9,7 +9,6 @@ import {
 import { useParams } from "react-router-dom";
 import "./toDo.css";
 import { useCookies } from "react-cookie";
-import LazyLoad from "react-lazyload";
 
 const ToDoComponent = () => {
   // State variables
@@ -180,7 +179,6 @@ const ToDoComponent = () => {
   };
 
   return (
-    <LazyLoad>
       <div className="app-background">
         <div className="main-container">
           <div className="input-container">
@@ -268,7 +266,6 @@ const ToDoComponent = () => {
           </div>
         </div>
       </div>
-    </LazyLoad>
   );
 };
 
