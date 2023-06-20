@@ -28,8 +28,10 @@ docker build -t client .
 cd .\server
 docker build -t server .
 docker-compose up
+open localhost:3000
 ```
 
+Enjoy!!
 
 
 
