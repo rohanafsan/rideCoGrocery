@@ -1,0 +1,109 @@
+.share-list-background {
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../img/background.jpg");
+
+    min-height: 100vh;
+  }
+
+  .share-list-container {
+    background-color: lavender;
+    
+    width: 700px;
+    height: min-content;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 10px 10px 26px 0px rgba(0, 0, 0, 0.35);
+  }
+
+  .empty-lists {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+font-family: 'Roboto Slab', serif;
+
+  }
+
+  .landing-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .landing-buttons button {
+    margin: 0 10px;
+    color: #222;
+  }
+
+  .share-list-items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .share-list-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 60px 40px 60px 20px;
+    border-radius: 10px;
+    background-image: url("../../img/listbackground.jpg");
+    background-size: cover;
+    background-position: center;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 10px;
+    position: relative; /* Add position relative */
+  }
+
+    .share-list-item-container:hover {
+        background-color: #ec645b;
+        color: black;
+    }
+  
+  .share-list-item-name {
+    cursor: pointer;
+    margin-bottom: auto; /* Use margin-bottom: auto to push to top-left */
+    margin-top: 10px;
+    border: rgb(222, 255, 161) 2px solid;
+    border-radius: 10px;
+    background-color: rgb(136, 204, 136);
+    padding: 5px;
+    color: black; 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200px;
+  }
+
+  .share-list-item-email {
+    cursor: pointer;
+    margin-bottom: auto; /* Use margin-bottom: auto to push to top-left */
+    margin-top: 10px;
+    border: rgb(222, 255, 161) 2px solid;
+    border-radius: 10px;
+    background-color: rgb(136, 204, 136);
+    padding: 10px;
+    color: black; 
+    padding: 5px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 768px) {
+  .share-list-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 576px) {
+  .share-list-container {
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
+
+

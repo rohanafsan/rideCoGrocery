@@ -59,7 +59,7 @@ const HeaderBar = () => {
               </a>
             </span>
             <span className="clickable-text">
-              <a href="/signup" className="clickable-text">
+              <a href="/register" className="clickable-text">
                 Register
               </a>
             </span>

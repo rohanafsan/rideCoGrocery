@@ -29,7 +29,7 @@ const Landing = () => {
             Start listing
           </Link>
           {!email && !authToken && (
-            <Link to="/signup" className="landing-button">
+            <Link to="/register" className="landing-button">
               Sign up to start sharing
             </Link>
           )}
