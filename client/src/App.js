@@ -1,4 +1,4 @@
-// import ToDoComponent from "./components/ToDoComponent";
+import ToDo from "./components/todo/ToDoComponent";
 import AuthComponent from "./components/auth/Auth";
 import HeaderBar from "./components/landing/Header";
 import Landing from "./components/landing/Landing";
@@ -15,7 +15,7 @@ function App() {
       <HeaderBar />
       <Routes>
         <Route exact path="/" element={<Landing />} />
-        {/* <Route path="/list/:id" element={<ToDoComponent />} /> */}
+        <Route path="/list/:id" element={<ToDo />} />
         <Route path="/register" element={<AuthComponent />} />
 
         <Route path="/login" element={<Login />} />
