@@ -13,7 +13,7 @@ Feature Implement:
 4. Adding items to specific lists add/edit/delete/
 
 ### Environment variables
-**Ensure that your client folder contains a .env file with the variable**
+**Ensure that your client folder contains a .env file with the variable to send requests to the server**
 
 ```
 REACT_APP_BACKEND_HOST = http://localhost:8000
