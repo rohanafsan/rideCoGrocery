@@ -1,4 +1,4 @@
-# vis-dash
+# rideCoGrocery
 
 The grocery list management web application is a mini-project designed to facilitate the creation, editing, and deletion of grocery items. The application is tailored explicitly for a single-family households to efficiently manage their grocery needs.
 
