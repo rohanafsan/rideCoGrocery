@@ -32,7 +32,11 @@ const HeaderBar = () => {
   return (
     <header className="header-bar">
       <div className="logo-and-title">
-        <h1 className="title">RideCo-Grocery</h1>
+        <h1 className="title">
+          <a href="/" className="clickable-title">
+            RideCo-Grocery
+          </a>
+        </h1>
       </div>
       <div className="login-register-buttons">
         <span className="clickable-text">

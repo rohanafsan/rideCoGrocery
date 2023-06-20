@@ -40,18 +40,21 @@ describe("Modal component", () => {
     expect(successMessageElement).toBeInTheDocument();
 
     // Check if the fetch function was called with the correct arguments
-    expect(mockFetch).toHaveBeenCalledWith("http://localhost:8000/sharelists", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        itemid: 1,
-        sharedby: undefined, // Depends on the cookies mock
-        sharedto: "user@example.com",
-        listname: "My List",
-      }),
-    });
+    expect(mockFetch).toHaveBeenCalledWith(
+      `${process.env.REACT_APP_BACKEND_HOST}/sharelists`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          itemid: 1,
+          sharedby: undefined, // Depends on the cookies mock
+          sharedto: "user@example.com",
+          listname: "My List",
+        }),
+      }
+    );
   });
 
   test("calls onClose when the close button is clicked", () => {

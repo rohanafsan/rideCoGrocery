@@ -39,7 +39,7 @@
   }
   
   h2 {
-    color: sienna;
+    color: black;
     font-size: 20px;
     margin-bottom: 10px;
   }
@@ -71,7 +71,7 @@
   
   .share-button {
     padding: 8px 16px;
-    background-color: #ec645b;
+    background-color: rgb(136, 204, 136);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -80,7 +80,7 @@
   }
   
   .share-button:hover {
-    background-color: #ec645b;
+    background-color: black;
   }
 
   .share-list-success {

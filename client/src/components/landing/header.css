@@ -36,10 +36,19 @@
     font-size: 0.4rem;
     color: #fff;
   }
+
+  .clickable-title{
+    cursor: pointer;
+    font-size: 0.6rem;
+    color: #fff;
+    text-decoration: none;
+  }
+
   
   .clickable-text:hover {
     color: lightgreen;
     text-decoration: underline;
+    
   }
   
   .menu-icon {

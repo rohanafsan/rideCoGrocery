@@ -15,11 +15,8 @@ router.get("/", (req, res) => {
 // Endpoint to get all the items in a list
 router.get("/todolist", async (req, res) => {
   try {
-    const { rows } = await pool.query("SELECT * FROM todoList");
-    res.status(200).json({
-      message: "Retrieved items successfully!",
-      rows: rows,
-    });
+    const { rows } = await pool.query("SELECT * FROM todolist");
+    res.json(rows);
   } catch (err) {
     console.error(err.message);
     res.sendStatus(500);
@@ -31,13 +28,10 @@ router.get("/todolist/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const { rows } = await pool.query(
-      "SELECT * FROM todoList WHERE listid = $1",
+      "SELECT * FROM todolist WHERE listid = $1",
       [id]
     );
-    res.status(200).json({
-      message: "Retrieved item using id successfully!",
-      rows: rows,
-    });
+    res.json(rows);
   } catch (err) {
     console.error(err.message);
     res.sendStatus(500);
@@ -49,7 +43,7 @@ router.post("/todolist", async (req, res) => {
   const { title, quantity, listid } = req.body;
   try {
     const result = await pool.query(
-      "INSERT INTO todoList (title, quantity, listid) VALUES ($1, $2, $3) RETURNING id",
+      "INSERT INTO todolist (title, quantity, listid) VALUES ($1, $2, $3) RETURNING id",
       [title, quantity, listid]
     );
     const insertedId = result.rows[0].id;
@@ -69,10 +63,7 @@ router.put("/todolist/:id", async (req, res) => {
       "UPDATE todoList SET title = $1, quantity = $2 WHERE id = $3 RETURNING *",
       [title, quantity, id]
     );
-    res.status(200).json({
-      message: "Task updated successfully!",
-      rows: rows,
-    });
+    res.json(rows);
   } catch (err) {
     console.error(err.message);
     res.sendStatus(500);
@@ -83,7 +74,7 @@ router.put("/todolist/:id", async (req, res) => {
 router.delete("/todoList/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    await pool.query("DELETE FROM todoList WHERE id = $1", [id]);
+    await pool.query("DELETE FROM todolist WHERE id = $1", [id]);
     res.status(200).send("Task deleted successfully!");
   } catch (err) {
     console.error(err.message);
@@ -95,10 +86,7 @@ router.delete("/todoList/:id", async (req, res) => {
 router.get("/users", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM users");
-    res.status(200).json({
-      message: "Retrieved users successfully!",
-      rows: rows,
-    });
+    res.json(rows);
   } catch (err) {
     console.error(err.message);
     res.sendStatus(500);
@@ -146,7 +134,8 @@ router.post("/users/login", async (req, res) => {
       return res.status(401).json({ message: "User does not exist!" });
     }
 
-    const success = bcrypt.compareSync("B4c0//", rows[0].password);
+    const success = bcrypt.compare("B4c0//", rows[0].password);
+    console.log(success);
     if (!success) {
       return res
         .status(401)
@@ -169,10 +158,7 @@ router.get("/mylists/:email", async (req, res) => {
       "SELECT id, listname, email FROM lists WHERE email = $1",
       [email]
     );
-    res.status(200).json({
-      message: "Retrieved lists successfully!",
-      rows: rows,
-    });
+    res.json(rows);
   } catch (err) {
     console.error(err.message);
     res.sendStatus(500);
@@ -237,10 +223,7 @@ router.get("/sharelists/:email", async (req, res) => {
       "SELECT itemid, sharedby, sharedto, name FROM sharelists WHERE sharedto = $1",
       [email]
     );
-    res.status(200).json({
-      message: "Retrieved shared lists successfully!",
-      rows: rows,
-    });
+    res.json(rows);
   } catch (err) {
     console.error(err.message);
     res.sendStatus(500);
