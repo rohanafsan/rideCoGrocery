@@ -36,6 +36,9 @@ const MyList = () => {
 
   // Redirect to the list page
   const redirectToToDo = (listid) => {
+    if (listid === null) {
+      setListId(1);
+    }
     // navigate(`/list/${listId}`);
     // window.location.href = `/list/${listId}`;
     navigate(`/list/${listid}`);
