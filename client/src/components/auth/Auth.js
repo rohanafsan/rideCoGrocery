@@ -2,6 +2,7 @@ import "./auth.css";
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 const AuthComponent = () => {
@@ -44,12 +45,15 @@ const AuthComponent = () => {
     }
 
     // Send request to backend tp create a new user
-    const response = await fetch(`http://localhost:8000/users/register`, {
-      method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, name, pass }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_HOST}/users/register`,
+      {
+        method: "POST",
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name, pass }),
+      }
+    );
 
     // Handle response from backend and refresh page
     const data = await response.json();
@@ -58,8 +62,8 @@ const AuthComponent = () => {
     } else {
       console.log(data);
       // refresh to specific page
-      window.location.href = "/login";
     }
+    window.location.href = "/login";
   };
 
   return (

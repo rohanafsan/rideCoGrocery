@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./myList.css";
+
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -21,10 +22,12 @@ const MyList = () => {
   useEffect(() => {
     const getLists = async () => {
       try {
+        console.log(cookies.Email);
         const response = await fetch(
-          `http://localhost:8000/mylists/${cookies.Email}`
+          `${process.env.REACT_APP_BACKEND_HOST}/mylists/${cookies.Email}`
         );
         const jsonData = await response.json();
+        console.log(jsonData);
         setLists(jsonData);
       } catch (err) {
         // console.error(err.message);
@@ -57,14 +60,17 @@ const MyList = () => {
     setLists(newItems);
 
     try {
-      const response = await fetch("http://localhost:8000/mylists", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newListAdd),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_HOST}/mylists`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newListAdd),
+        }
+      );
       const data = await response.json();
       newListAdd.id = data;
       const newItems = [...lists, newListAdd];
@@ -85,7 +91,7 @@ const MyList = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/mylists/${newListDelete.id}`,
+        `${process.env.REACT_APP_BACKEND_HOST}/mylists/${newListDelete.id}`,
         {
           method: "DELETE",
           mode: "cors",

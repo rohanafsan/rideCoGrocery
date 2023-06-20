@@ -2,6 +2,7 @@ import "./auth.css";
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
@@ -38,12 +39,15 @@ const Login = () => {
     };
 
     // Send request to backend to login user
-    const response = await fetch(`http://localhost:8000/users/login`, {
-      method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userInfo),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_HOST}/users/login`,
+      {
+        method: "POST",
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userInfo),
+      }
+    );
 
     // Handle response from backend and show error/refresh page
     const data = await response.json();

@@ -13,11 +13,10 @@ const ShareList = () => {
 
   // Get all lists shared with the user
   useEffect(() => {
-    console.log(cookies.Email);
     const getLists = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/sharelists/${cookies.Email}`
+          `${process.env.REACT_APP_BACKEND_HOST}/sharelists/${cookies.Email}`
         );
         const jsonData = await response.json();
         if (jsonData.length > 0) {

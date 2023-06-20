@@ -28,13 +28,16 @@ const Modal = ({ open, onClose, itemId, listName }) => {
 
     // Update the database
     try {
-      const response = await fetch(`http://localhost:8000/sharelists`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(item),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_HOST}/sharelists`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(item),
+        }
+      );
     } catch (err) {
       console.error(err.message);
     }

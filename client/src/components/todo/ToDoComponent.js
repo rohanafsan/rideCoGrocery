@@ -9,6 +9,7 @@ import {
 import { useParams } from "react-router-dom";
 import "./toDo.css";
 import { useCookies } from "react-cookie";
+import LazyLoad from "react-lazyload";
 
 const ToDoComponent = () => {
   // State variables
@@ -28,7 +29,9 @@ const ToDoComponent = () => {
   useEffect(() => {
     const getItems = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/todoList/${id}`);
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_HOST}/todoList/${id}`
+        );
         const jsonData = await response.json();
         if (jsonData.length > 0) {
           setItems(jsonData);
@@ -66,14 +69,17 @@ const ToDoComponent = () => {
 
     // Add new item to backend server
     try {
-      const response = await fetch("http://localhost:8000/todoList", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(testItem),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_HOST}/todoList`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(testItem),
+        }
+      );
       const data = await response.json();
       newItem.id = data.id;
       const newItems = [...items, newItem];
@@ -105,7 +111,7 @@ const ToDoComponent = () => {
     };
     try {
       const response = await fetch(
-        `http://localhost:8000/todoList/${item.id}`,
+        `${process.env.REACT_APP_BACKEND_HOST}/todoList/${item.id}`,
         {
           method: "PUT",
           headers: {
@@ -139,9 +145,12 @@ const ToDoComponent = () => {
     setQuantity("");
 
     try {
-      const response = await fetch(`http://localhost:8000/todoList/${itemId}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_HOST}/todoList/${itemId}`,
+        {
+          method: "DELETE",
+        }
+      );
       console.log(response);
     } catch (err) {
       console.error(err.message);
@@ -159,7 +168,7 @@ const ToDoComponent = () => {
     //
     try {
       const response = await fetch(
-        `http://localhost:8000/todoList/${newItems[index].id}`,
+        `${process.env.REACT_APP_BACKEND_HOST}/todoList/${newItems[index].id}`,
         {
           method: "DELETE",
         }
@@ -171,91 +180,95 @@ const ToDoComponent = () => {
   };
 
   return (
-    <div className="app-background">
-      <div className="main-container">
-        <div className="input-container">
-          <div className="add-item-box">
-            <input
-              value={inputValue}
-              onChange={(event) => setInputValue(event.target.value)}
-              className="add-item-input"
-              placeholder="Add an item..."
-            />
-          </div>
-          <div className="add-item-box">
-            <select
-              value={quantity}
-              onChange={(event) => setQuantity(event.target.value)}
-              className="add-item-quantity"
-              placeholder="Add quantity..."
-            >
-              <option value="">Select quantity...</option>
-              {[...Array(20)].map((_, index) => (
-                <option key={index} value={index + 1}>
-                  {index + 1}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <div className="add-item-button">
-          {!isEdit ? (
-            <button onClick={() => handleAddButtonClick()}>
-              <FontAwesomeIcon icon={faPlus} /> Add Item
-            </button>
-          ) : (
-            <button onClick={() => editListItem()}>
-              <FontAwesomeIcon icon={faPlus} /> Update Item
-            </button>
-          )}
-        </div>
-        <div
-          className="item-list"
-          style={{ maxHeight: "500px", overflowY: "auto" }}
-        >
-          {items.map((item, listIndex) => (
-            <div className="item-container" key={listIndex}>
-              <div className="item-name">
-                {item.isSelected ? (
-                  <>
-                    <span className="completed">
-                      {item.title + ":" + item.quantity}
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <span>{item.title + ":" + item.quantity}</span>
-                  </>
-                )}
-              </div>
-              <div className="to-do-container-buttons">
-                <button>
-                  <FontAwesomeIcon
-                    icon={faCheck}
-                    onClick={() => toggleComplete(listIndex)}
-                    data-testid="complete-button"
-                  />
-                </button>
-                <button>
-                  <FontAwesomeIcon
-                    icon={faEdit}
-                    onClick={() => handleEditButtonClick(item, listIndex)}
-                    data-testid="edit-button"
-                  />
-                </button>
-                <button>
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    onClick={() => handleDeleteButtonClick(item.id, listIndex)}
-                    data-testid="delete-button"
-                  />
-                </button>
-              </div>
+    <LazyLoad>
+      <div className="app-background">
+        <div className="main-container">
+          <div className="input-container">
+            <div className="add-item-box">
+              <input
+                value={inputValue}
+                onChange={(event) => setInputValue(event.target.value)}
+                className="add-item-input"
+                placeholder="Add an item..."
+              />
             </div>
-          ))}
+            <div className="add-item-box">
+              <select
+                value={quantity}
+                onChange={(event) => setQuantity(event.target.value)}
+                className="add-item-quantity"
+                placeholder="Add quantity..."
+              >
+                <option value="">Select quantity...</option>
+                {[...Array(20)].map((_, index) => (
+                  <option key={index} value={index + 1}>
+                    {index + 1}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="add-item-button">
+            {!isEdit ? (
+              <button onClick={() => handleAddButtonClick()}>
+                <FontAwesomeIcon icon={faPlus} /> Add Item
+              </button>
+            ) : (
+              <button onClick={() => editListItem()}>
+                <FontAwesomeIcon icon={faPlus} /> Update Item
+              </button>
+            )}
+          </div>
+          <div
+            className="item-list"
+            style={{ maxHeight: "500px", overflowY: "auto" }}
+          >
+            {items.map((item, listIndex) => (
+              <div className="item-container" key={listIndex}>
+                <div className="item-name">
+                  {item.isSelected ? (
+                    <>
+                      <span className="completed">
+                        {item.title + ":" + item.quantity}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span>{item.title + ":" + item.quantity}</span>
+                    </>
+                  )}
+                </div>
+                <div className="to-do-container-buttons">
+                  <button>
+                    <FontAwesomeIcon
+                      icon={faCheck}
+                      onClick={() => toggleComplete(listIndex)}
+                      data-testid="complete-button"
+                    />
+                  </button>
+                  <button>
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      onClick={() => handleEditButtonClick(item, listIndex)}
+                      data-testid="edit-button"
+                    />
+                  </button>
+                  <button>
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      onClick={() =>
+                        handleDeleteButtonClick(item.id, listIndex)
+                      }
+                      data-testid="delete-button"
+                    />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </LazyLoad>
   );
 };
 
