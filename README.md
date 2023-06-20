@@ -6,14 +6,14 @@ With this application, users can easily create a new grocery list and add items 
 
 The application was built using a PERN(PostgreSQL, Express, React, Node) stack. 
 
-Feature Implement: 
-1. User Authentication (Login/Register/Logout)
+Features Implemented: 
+1. User Authentication (Login/Register/Logout) using bCrypt for hashing passing and jwt to set authentication cookies, to change user screen dynamicall
 2. Multiple list creation for better organization
 3. Sharing lists with family members from which they can add/edit/delete/purchase items from
 4. Adding items to specific lists add/edit/delete/
 
 ### Environment variables
-**Ensure that your client folder contains a .env file with the variable to send requests to the server**
+**Ensure that that you are on the master branch and your client folder contains a .env file with the variable to send requests to the server**
 
 ```
 REACT_APP_BACKEND_HOST = http://localhost:8000
@@ -31,7 +31,12 @@ docker-compose up
 open localhost:3000
 ```
 
+UI Flow for the application for ease of use:
+![UI Flow](https://github.com/rohanafsan/rideCoGrocery/blob/master/UI%20Flow%20-%20RideCoGrocery.jpeg)
+
+```
 Enjoy!!
+```
 
 
 
