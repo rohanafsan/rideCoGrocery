@@ -31,7 +31,8 @@ docker-compose up
 open localhost:3000
 ```
 
-UI Flow for the application for ease of use:
+UI Flow for the application for ease of understanding:
+
 ![UI Flow](https://github.com/rohanafsan/rideCoGrocery/blob/master/UI%20Flow%20-%20RideCoGrocery.jpeg)
 
 ```
